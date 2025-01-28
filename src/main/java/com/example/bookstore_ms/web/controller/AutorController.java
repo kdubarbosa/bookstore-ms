@@ -27,7 +27,6 @@ public class AutorController {
     public ResponseEntity<AutorDTO> salvar(@RequestBody InserirAutorDTO autorInsertDTO) {
         Optional<AutorDTO> autorDTO = autorService.salvar(autorInsertDTO);
 
-        // Se o autor for salvo com sucesso, retorna 201 (Created)
         return autorDTO.map(dto -> ResponseEntity.status(HttpStatus.CREATED).body(dto))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
@@ -37,7 +36,6 @@ public class AutorController {
     public ResponseEntity<AutorDTO> atualizar(@PathVariable Long id, @RequestBody AtualizarAutorDTO atualizarAutorDTO) {
         Optional<AutorDTO> autorDTO = autorService.atualizar(id, atualizarAutorDTO);
 
-        // Se o autor for encontrado e atualizado, retorna 200 (OK)
         return autorDTO.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
